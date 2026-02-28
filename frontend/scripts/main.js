@@ -196,7 +196,7 @@
     setOut('<div class="plan-loading">⏳ Gerando plano, aguarde...</div>');
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/generate-plan", {
+      const res = await fetch("http://127.0.0.1:8001/generate-plan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ category: selectedCategory, input: userInput })
@@ -216,7 +216,7 @@
     } catch (e) {
       renderError(
         "Não foi possível conectar ao backend.<br>" +
-        "<small>Verifique se o servidor está rodando em http://127.0.0.1:8000</small>"
+        "<small>Verifique se o servidor está rodando em http://127.0.0.1:8001</small>"
       );
     } finally {
       btn.textContent = oldText;

@@ -17,7 +17,7 @@
 
   if (!messagesEl || !inputEl || !sendBtn) return;
 
-  const API_URL    = "http://127.0.0.1:8000/chat";
+  const API_URL    = "http://127.0.0.1:8001/chat";
   const MAX_CHARS  = 500;
 
   // Histórico de conversa (mantém contexto multi-turno)
@@ -27,7 +27,7 @@
   // ── Status do servidor ────────────────────────────────────
   async function checkStatus() {
     try {
-      const res = await fetch("http://127.0.0.1:8000/health");
+      const res = await fetch("http://127.0.0.1:8001/health");
       const data = await res.json();
       if (data.key_loaded) {
         setStatus("online", "CloudOps IA • Online");
@@ -243,7 +243,7 @@
       removeTyping();
       history.pop();
       if (e.message.includes("fetch")) {
-        addErrorMessage("Não foi possível conectar ao backend. Verifique se o servidor está rodando em http://127.0.0.1:8000");
+        addErrorMessage("Não foi possível conectar ao backend. Verifique se o servidor está rodando em http://127.0.0.1:8001");
       } else {
         addErrorMessage(e.message || "Erro inesperado.");
       }
