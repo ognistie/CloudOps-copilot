@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CloudOps Copilot — Web3 Futuristic Landing</title>
+
+  <!-- ══════════════════════════════════════════════════════════
+       FONTES — Google Fonts Inter (400 → 900)
+       Usada em todo o projeto para tipografia consistente.
+       preconnect acelera o carregamento da fonte.
+  ══════════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- ══════════════════════════════════════════════════════════
+       ESTILOS GLOBAIS
+       main.css: reset, variáveis CSS (--grad, --muted, --text),
+       topbar, hero grid, cards, steps, footer, orbs, etc.
+  ══════════════════════════════════════════════════════════ -->
+  <link rel="stylesheet" href="./styles/main.css" />
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════
+       CANVAS DE PARTÍCULAS
+       Renderizado pelo particles.js dentro de main.js.
+       Fica fixo atrás de todo o conteúdo via CSS (z-index).
+       aria-hidden="true" → ignorado por leitores de tela.
+  ══════════════════════════════════════════════════════════ -->
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       TOPBAR — Barra de navegação fixa no topo
+       .topbar            → fundo com backdrop-filter blur
+       .brand             → logo + nome do projeto
+       .nav               → links desktop (ocultos no mobile)
+       .nav__link--active → destaca a página atual
+       .nav__pill         → botão pill para API Docs
+       #menuBtn           → abre o drawer lateral no mobile
+  ══════════════════════════════════════════════════════════ -->
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="CloudOps Copilot Home">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__text">
+        <b>CloudOps Copilot</b>
+        <small>IA + Cloud + Automação</small>
+      </span>
+    </a>
+
+    <nav class="nav">
+      <a class="nav__link nav__link--active" href="index.html">Home</a>
+      <a class="nav__link" href="#features">Features</a>
+      <a class="nav__link" href="#assets">Assets</a>
+      <a class="nav__link" href="#how">How it works</a>
+      <a class="nav__link" href="chat.html">Chat IA</a>
+      <a class="nav__link" href="comunidade.html">Comunidade</a>
+      <!-- Abre a documentação automática do FastAPI em nova aba -->
+      <a class="nav__link nav__pill" href="http://127.0.0.1:8000/docs" target="_blank" rel="noreferrer">API Docs</a>
+    </nav>
+
+    <!-- Botão hambúrguer — visível apenas no mobile -->
+    <button class="nav__menu" id="menuBtn" aria-label="Abrir menu">☰</button>
+  </header>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       DRAWER — Menu lateral para mobile
+       Controlado por JS (main.js): abre ao clicar em #menuBtn,
+       fecha via #menuClose, #drawerBackdrop ou links internos.
+       aria-hidden="true" por padrão (acessibilidade).
+  ══════════════════════════════════════════════════════════ -->
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer__panel">
+
+      <div class="drawer__head">
+        <span class="drawer__title">Menu</span>
+        <button class="drawer__close" id="menuClose" aria-label="Fechar">✕</button>
+      </div>
+
+      <!-- Links espelham a navbar desktop -->
+      <a class="drawer__link" href="index.html">🏠 Home</a>
+      <a class="drawer__link" href="#features">⚡ Features</a>
+      <a class="drawer__link" href="#assets">🎨 Assets</a>
+      <a class="drawer__link" href="#how">⚙️ How it works</a>
+      <a class="drawer__link" href="chat.html">🤖 Chat IA</a>
+      <a class="drawer__link" href="comunidade.html">🌐 Comunidade</a>
+      <a class="drawer__link" href="http://127.0.0.1:8000/docs" target="_blank" rel="noreferrer">📡 API Docs</a>
+
+      <div class="drawer__foot">
+        <span class="chip">Web3 • CloudOps • Neon UI</span>
+      </div>
+    </div>
+
+    <!-- Backdrop escuro: clique fora fecha o drawer -->
+    <div class="drawer__backdrop" id="drawerBackdrop"></div>
+  </aside>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       MAIN — Conteúdo principal
+       id="top" → permite o "Voltar ao topo" via âncora href="#top"
+  ══════════════════════════════════════════════════════════ -->
+  <main id="top">
+
+
+    <!-- ════════════════════════════════════════════════════════
+         SEÇÃO 1 — HERO
+         Layout em grid 2 colunas: texto (esquerda) + SVG (direita).
+         .reveal  → animação de entrada via IntersectionObserver
+         .grad    → texto com gradiente neon (definido em main.css)
+         .glow    → efeito de brilho no texto via text-shadow
+    ════════════════════════════════════════════════════════ -->
+    <section class="section hero">
+      <div class="container hero__grid">
+
+        <!-- ── Coluna esquerda: título, CTAs e métricas ──── -->
+        <div class="hero__left reveal">
+
+          <!-- Kicker: etiqueta pequena acima do H1 -->
+          <div class="kicker">
+            <span class="kicker__dot"></span>
+            <span>Metaverse-grade CloudOps</span>
+            <span class="kicker__sep">•</span>
+            <span>Web3 Startup UI</span>
+          </div>
+
+          <!-- H1 com parte do texto em gradiente -->
+          <h1 class="hero__title">
+            CloudOps Copilot<br />
+            <span class="grad">Deploy, Segurança e<br>Observabilidade</span>
+          </h1>
+
+          <!-- Subtítulo de autoria (separado do H1 para hierarquia visual) -->
+          <p class="hero__subtitle">De Guilherme <span class="glow">e Gabriel Moraes Franco</span></p>
+
+          <!-- Descrição principal do produto -->
+          <p class="hero__desc">
+            Descreva seu cenário e receba um plano claro com checklist, arquitetura sugerida,
+            boas práticas e próximos passos — com linguagem padronizada "como se você estivesse falando comigo".
+          </p>
+
+          <!-- CTAs: botão primário (gradiente) + botão ghost (outline) -->
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#features">
+              Explorar features
+              <span class="btn__shine" aria-hidden="true"></span><!-- shimmer animado no hover -->
+            </a>
+            <!-- Botão ghost com ícone SVG inline de chat -->
+            <a class="btn btn--ghost" href="chat.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                   style="width:16px;height:16px;margin-right:6px">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+              </svg>
+              Abrir Chat IA
+            </a>
+          </div>
+
+          <!-- Métricas rápidas: 3 pills abaixo dos CTAs -->
+          <div class="hero__meta">
+            <div class="metric"><b>Neon UI</b><span>Glass + Glow</span></div>
+            <div class="metric"><b>FastAPI</b><span>/generate-plan</span></div>
+            <div class="metric"><b>Web3 Vibe</b><span>Premium feel</span></div>
+          </div>
+        </div>
+
+
+        <!-- ── Coluna direita: SVG astronauta + orbs decorativos ── -->
+        <div class="hero__right reveal">
+
+          <!-- Orbs: esferas de glow posicionadas em absolute via main.css -->
+          <div class="orb orb--a"></div>
+          <div class="orb orb--b"></div>
+          <div class="orb orb--c"></div>
+
+          <!-- Card que contém a ilustração SVG -->
+          <div class="astroCard">
+            <div class="astroCard__frame">
+
+              <!-- ────────────────────────────────────────────
+                   SVG DO ASTRONAUTA
+                   Ilustração vetorial com:
+                   - radialGradient "rg"    → glow de fundo
+                   - linearGradient "lg"    → shapes flutuantes
+                   - filter "softGlow"      → blur + feMerge
+                   Componentes: capacete, visor, corpo, linhas
+              ──────────────────────────────────────────────── -->
+              <svg class="astronaut" viewBox="0 0 420 420" role="img" aria-label="Astronaut illustration">
+                <defs>
+                  <!-- Fundo de glow radial: ciano → rosa → laranja -->
+                  <radialGradient id="rg" cx="50%" cy="45%" r="60%">
+                    <stop offset="0%"   stop-color="#00f5ff" stop-opacity="0.55"/>
+                    <stop offset="60%"  stop-color="#ff3cac" stop-opacity="0.22"/>
+                    <stop offset="100%" stop-color="#ff6a00" stop-opacity="0.06"/>
+                  </radialGradient>
+                  <!-- Gradiente linear para shapes geométricos -->
+                  <linearGradient id="lg" x1="0%" x2="100%">
+                    <stop offset="0%"   stop-color="#ff3cac"/>
+                    <stop offset="50%"  stop-color="#7c3aed"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                  </linearGradient>
+                  <!-- Filtro: blur suave + merge com original -->
+                  <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="6" result="blur"/>
+                    <feColorMatrix in="blur" type="matrix"
+                      values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.9 0" result="glow"/>
+                    <feMerge>
+                      <feMergeNode in="glow"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <!-- Círculo de fundo com gradiente radial -->
+                <circle cx="210" cy="195" r="150" fill="url(#rg)" />
+
+                <!-- Shapes decorativos flutuantes -->
+                <path d="M310 86 l32 18 -32 18 -32-18z" fill="url(#lg)" opacity=".65" filter="url(#softGlow)"/>
+                <circle cx="92"  cy="240" r="12" fill="#00f5ff" opacity=".75" filter="url(#softGlow)"/>
+                <circle cx="332" cy="265" r="7"  fill="#ff6a00" opacity=".75" filter="url(#softGlow)"/>
+
+                <!-- Corpo do traje espacial -->
+                <g filter="url(#softGlow)">
+                  <path d="M140 265c0-45 34-80 76-80s76 35 76 80v34c0 30-24 54-54 54h-44c-30 0-54-24-54-54v-34z"
+                        fill="#1a1933" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+                  <path d="M160 280h120v18c0 18-14 32-32 32h-56c-18 0-32-14-32-32v-18z"
+                        fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)" stroke-width="2"/>
+                </g>
+
+                <!-- Capacete + visor ciano -->
+                <g filter="url(#softGlow)">
+                  <path d="M140 180c0-46 34-83 76-83s76 37 76 83v20c0 20-16 36-36 36h-80c-20 0-36-16-36-36v-20z"
+                        fill="rgba(0,0,0,.28)" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+                  <path d="M165 182c0-30 22-54 51-54 29 0 51 24 51 54v10c0 10-8 18-18 18h-66c-10 0-18-8-18-18v-10z"
+                        fill="rgba(0,245,255,.12)" stroke="rgba(0,245,255,.35)" stroke-width="2"/>
+                  <!-- Reflexo no visor -->
+                  <path d="M176 150c20-18 58-18 78 0" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="3" opacity=".7"/>
+                </g>
+
+                <!-- Linhas de acento coloridas (rosa e ciano) -->
+                <path d="M150 246h120" stroke="rgba(255,60,172,.55)" stroke-width="3" opacity=".8"/>
+                <path d="M174 322h72"  stroke="rgba(0,245,255,.50)"  stroke-width="3" opacity=".85"/>
+              </svg>
+
+              <!-- Badge flutuante na base do card -->
+              <div class="astroCard__badge">
+                <span class="badgeDot"></span>
+                <span>Premium Web3 UI • Neon Glass</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- /HERO -->
+
+
+    <!-- ════════════════════════════════════════════════════════
+         SEÇÃO 2 — FEATURES
+         4 cards em grid com ícone SVG, título, descrição
+         e linha de glow ciano na base ao hover.
+         .section--alt → cor de fundo alternada (main.css)
+    ════════════════════════════════════════════════════════ -->
+    <section id="features" class="section section--alt">
+      <div class="container">
+
+        <!-- Cabeçalho: kicker + título parcialmente gradiente -->
+        <div class="section__head reveal">
+          <div class="kicker">
+            <span class="kicker__dot"></span>
+            <span>O que entregamos</span>
+          </div>
+          <h2 class="section__title">Features com <span class="grad">glow</span></h2>
+          <p class="section__desc">Cada funcionalidade pensada para cloud engineers que precisam de velocidade e precisão.</p>
+        </div>
+
+        <!-- Grid de 4 cards (main.css cuida do layout responsivo) -->
+        <div class="cards">
+
+          <!-- Card 1: Planos objetivos (ícone de raio/lightning) -->
+          <article class="card reveal">
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <h3>Planos objetivos</h3>
+            <p>Checklist + arquitetura + riscos + próximos passos em formato pronto para execução imediata.</p>
+            <!-- Linha de glow na base: opacity 0 → 1 no hover via CSS -->
+            <div class="card__glow"></div>
+          </article>
+
+          <!-- Card 2: Security-first (ícone de escudo) -->
+          <article class="card reveal">
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3>Security-first</h3>
+            <p>Boas práticas (WAF, Shield, IAM, logging) como base do desenho cloud — sem pular etapas críticas.</p>
+            <div class="card__glow"></div>
+          </article>
+
+          <!-- Card 3: Observabilidade (ícone de monitor/heartbeat) -->
+          <article class="card reveal">
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+            </div>
+            <h3>Observabilidade</h3>
+            <p>CloudWatch, X-Ray e métricas ponta a ponta — com troubleshooting guiado e dashboards prontos.</p>
+            <div class="card__glow"></div>
+          </article>
+
+          <!-- Card 4: Controle de custo (ícone de cifrão) -->
+          <article class="card reveal">
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+              </svg>
+            </div>
+            <h3>Controle de custo</h3>
+            <p>Estratégias de otimização e governança (budgets, tagging, CUR) embutidas no plano gerado.</p>
+            <div class="card__glow"></div>
+          </article>
+
+        </div>
+      </div>
+    </section><!-- /FEATURES -->
+
+
+    <!-- ════════════════════════════════════════════════════════
+         SEÇÃO 3 — BELT (faixa de métricas e tecnologias)
+         Barra horizontal com 5 itens separados por divisórias.
+         .section--belt → sem padding, bordas top/bottom sutis
+         .belt__num     → gradiente neon no número/nome
+         .belt__divider → traço vertical entre os itens
+    ════════════════════════════════════════════════════════ -->
+    <section class="section section--belt">
+      <div class="container">
+        <div class="belt reveal">
+
+          <div class="belt__item">
+            <b class="belt__num">8+</b>
+            <span>Serviços AWS</span>
+          </div>
+
+          <div class="belt__divider"></div><!-- separador visual -->
+
+          <div class="belt__item">
+            <b class="belt__num">GPT-4o</b>
+            <span>Modelo de IA</span>
+          </div>
+
+          <div class="belt__divider"></div>
+
+          <div class="belt__item">
+            <b class="belt__num">FastAPI</b>
+            <span>Backend REST</span>
+          </div>
+
+          <div class="belt__divider"></div>
+
+          <div class="belt__item">
+            <b class="belt__num">Multi-turno</b>
+            <span>Memória de contexto</span>
+          </div>
+
+          <div class="belt__divider"></div>
+
+          <div class="belt__item">
+            <b class="belt__num">Web3 UI</b>
+            <span>Neon + Glass</span>
+          </div>
+
+        </div>
+      </div>
+    </section><!-- /BELT -->
+
+
+    <!-- ════════════════════════════════════════════════════════
+         SEÇÃO 4 — HOW IT WORKS
+         3 steps em grid horizontal. Cada step tem:
+         - .step__num       → número (01, 02, 03) em destaque
+         - .step__icon      → container SVG com tom rosa
+         - .step__connector → linha horizontal entre steps
+                              (visível apenas em desktop via @media)
+    ════════════════════════════════════════════════════════ -->
+    <section id="how" class="section section--alt">
+      <div class="container">
+
+        <div class="section__head reveal">
+          <div class="kicker">
+            <span class="kicker__dot"></span>
+            <span>Fluxo de uso</span>
+          </div>
+          <h2 class="section__title">How it <span class="grad">works</span></h2>
+          <p class="section__desc">3 passos simples. Zero confusão. Visual limpo e forte.</p>
+        </div>
+
+        <div class="steps">
+
+          <!-- Step 01 -->
+          <div class="step reveal">
+            <!-- Linha conectora horizontal (visível só em desktop) -->
+            <div class="step__connector"></div>
+            <div class="step__num">01</div>
+            <!-- Ícone SVG: balão de chat -->
+            <div class="step__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+              </svg>
+            </div>
+            <h3>Descreva o cenário</h3>
+            <p>Conte o que você quer construir ou resolver em cloud, em linguagem natural — sem jargão.</p>
+          </div>
+
+          <!-- Step 02 -->
+          <div class="step reveal">
+            <div class="step__connector"></div>
+            <div class="step__num">02</div>
+            <!-- Ícone SVG: engrenagem/sol -->
+            <div class="step__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+              </svg>
+            </div>
+            <h3>Geramos o plano</h3>
+            <p>Checklist + arquitetura + riscos + recomendações técnicas — pronto para executar em minutos.</p>
+          </div>
+
+          <!-- Step 03 (sem .step__connector por ser o último) -->
+          <div class="step reveal">
+            <div class="step__num">03</div>
+            <!-- Ícone SVG: layers/stack (deploy) -->
+            <div class="step__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3>Exporte e implemente</h3>
+            <p>Copie, exporte e transforme em tarefas (GitHub Issues / Jira / Notion) com um clique.</p>
+          </div>
+
+        </div>
+      </div>
+    </section><!-- /HOW IT WORKS -->
+
+
+    <!-- ════════════════════════════════════════════════════════
+         SEÇÃO 5 — PLATFORM / WALLET
+         ── ALTERAÇÃO APLICADA ──
+         O chat mock (platform__right com input + chips) foi
+         REMOVIDO desta seção. O chat agora é exclusivo da
+         página chat.html.
+
+         A seção agora usa .platform__solo: layout centralizado
+         com grid 2x2 de bullet points e ícones SVG.
+    ════════════════════════════════════════════════════════ -->
+    <section id="platform" class="section">
+      <div class="container">
+
+        <!-- Bloco centralizado sem coluna direita -->
+        <div class="platform__solo reveal">
+
+          <div class="kicker">
+            <span class="kicker__dot"></span>
+            <span>Web3-Grade Platform</span>
+            <span class="kicker__sep">•</span>
+            <span>Portfolio Ready</span>
+          </div>
+
+          <!-- Título com gradiente parcial na segunda palavra -->
+          <h2 class="section__title">Wallet / <span class="grad">Platform</span></h2>
+          <p class="section__desc">
+            Uma experiência "Web3-grade": interface premium, tipografia forte e um fluxo claro.
+            Ideal para apresentar como portfolio de Cloud/DevOps + Front-end.
+          </p>
+
+          <!-- Grid 2×2: 4 bullet points com ícone SVG + texto -->
+          <div class="platform__bullets-grid">
+
+            <!-- Bullet 1: Glassmorphism (ícone de escudo) -->
+            <div class="platform__bullet">
+              <span class="platform__bullet-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </span>
+              <div>
+                <b>Glassmorphism</b>
+                <span>Leve, sem esconder o background</span>
+              </div>
+            </div>
+
+            <!-- Bullet 2: Glow Effects (ícone de sol) -->
+            <div class="platform__bullet">
+              <span class="platform__bullet-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                </svg>
+              </span>
+              <div>
+                <b>Glow Effects</b>
+                <span>Botões, cards e bordas em gradiente</span>
+              </div>
+            </div>
+
+            <!-- Bullet 3: Animações Suaves (ícone de heartbeat) -->
+            <div class="platform__bullet">
+              <span class="platform__bullet-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+              </span>
+              <div>
+                <b>Animações Suaves</b>
+                <span>Hover + scroll reveal fluido</span>
+              </div>
+            </div>
+
+            <!-- Bullet 4: Mobile-First (ícone de celular) -->
+            <div class="platform__bullet">
+              <span class="platform__bullet-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="5" y="2" width="14" height="20" rx="2"/>
+                  <line x1="12" y1="18" x2="12.01" y2="18"/>
+                </svg>
+              </span>
+              <div>
+                <b>Mobile-First</b>
+                <span>100% responsivo em qualquer tela</span>
+              </div>
+            </div>
+
+          </div><!-- /platform__bullets-grid -->
+
+          <!-- CTAs centralizados -->
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="http://127.0.0.1:8000/docs" target="_blank" rel="noreferrer">
+              Abrir API Docs
+              <span class="btn__shine" aria-hidden="true"></span>
+            </a>
+            <a class="btn btn--ghost" href="#top">Voltar ao topo</a>
+          </div>
+
+        </div>
+      </div>
+    </section><!-- /PLATFORM -->
+
+
+    <!-- ════════════════════════════════════════════════════════
+         FOOTER
+         Grid de 3 colunas: brand | links rápidos | créditos.
+         .footer__divider → linha decorativa gradiente no topo.
+    ════════════════════════════════════════════════════════ -->
+    <footer class="footer">
+      <div class="footer__divider"></div>
+      <div class="container footer__grid">
+
+        <!-- Coluna 1: marca e tagline -->
+        <div>
+          <b class="footer__brand">CloudOps Copilot</b>
+          <p class="footer__text">Uma UI futurista + backend FastAPI para planos Cloud/DevOps.</p>
+        </div>
+
+        <!-- Coluna 2: links de navegação rápida (expandidos com Chat e Comunidade) -->
+        <div class="footer__links">
+          <a href="#features">Features</a>
+          <a href="#how">How it works</a>
+          <a href="#platform">Platform</a>
+          <a href="chat.html">Chat IA</a>
+          <a href="comunidade.html">Comunidade</a>
+        </div>
+
+        <!-- Coluna 3: créditos dos autores -->
+        <div class="footer__credits">
+          <span>&#169; CloudOps Copilot &#8212; Guilherme &amp; Gabriel Moraes Franco</span>
+          <small>UI &#8226; Cloud &#8226; Portfolio &#8226; Web3 aesthetic</small>
+        </div>
+
+      </div>
+    </footer>
+
+  </main><!-- /main -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       ESTILOS COMPLEMENTARES — Modernização do index.html
+       Aplicados inline para não modificar o main.css original.
+       Adicionam os novos componentes: belt, platform__solo,
+       card__icon com SVG, step__icon, hero__subtitle, etc.
+  ══════════════════════════════════════════════════════════ -->
+  <style>
+
+    /* ────────────────────────────────────────────────────────
+       HERO — Subtítulo de autoria abaixo do H1
+       Separado do título para deixar a hierarquia mais clara.
+    ──────────────────────────────────────────────────────── */
+    .hero__subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      margin: -8px 0 16px;
+      font-weight: 500;
+    }
+
+
+    /* ────────────────────────────────────────────────────────
+       FEATURE CARDS — Ícone SVG com container estilizado
+       Substituiu os emojis antigos por SVGs em um box neon.
+    ──────────────────────────────────────────────────────── */
+
+    /* Container do ícone: box quadrado com borda ciano */
+    .card__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(0, 245, 255, .08);
+      border: 1px solid rgba(0, 245, 255, .18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: #00f5ff;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card__icon svg { width: 22px; height: 22px; }
+
+    /* Ícone escala e brilha quando o card pai recebe hover */
+    .card:hover .card__icon {
+      transform: scale(1.1);
+      box-shadow: 0 0 24px rgba(0, 245, 255, .20);
+    }
+
+    /* Linha de glow na base do card (pseudo-borda animada) */
+    .card__glow {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 245, 255, .35), transparent);
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .card:hover .card__glow { opacity: 1; }
+
+    /* card precisa de position:relative para .card__glow funcionar */
+    .card { position: relative; overflow: hidden; }
+
+
+    /* ────────────────────────────────────────────────────────
+       BELT — Faixa horizontal de métricas/tecnologias
+       Barra sem padding, com bordas top/bottom sutis.
+    ──────────────────────────────────────────────────────── */
+
+    /* Remove padding da section para a faixa tocar os limites */
+    .section--belt { padding: 0; }
+
+    .belt {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 28px 0;
+      border-top: 1px solid rgba(255, 255, 255, .07);
+      border-bottom: 1px solid rgba(255, 255, 255, .07);
+      flex-wrap: wrap;
+    }
+
+    .belt__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 40px;
+      text-align: center;
+    }
+
+    /* Número/nome em gradiente neon, peso máximo (900) */
+    .belt__num {
+      font-size: 22px;
+      font-weight: 900;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.1;
+    }
+    .belt__item span {
+      font-size: 11px;
+      color: rgba(243, 244, 255, .40);
+      margin-top: 3px;
+    }
+
+    /* Traço vertical de separação entre items */
+    .belt__divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(255, 255, 255, .08);
+      flex-shrink: 0;
+    }
+
+
+    /* ────────────────────────────────────────────────────────
+       STEPS — Modernizados com ícone SVG e linha conectora
+    ──────────────────────────────────────────────────────── */
+
+    /* Pai precisa de position:relative para o conector funcionar */
+    .step { position: relative; }
+
+    /* Conector horizontal: oculto no mobile, visível no desktop */
+    .step__connector { display: none; }
+    @media (min-width: 768px) {
+      .step__connector {
+        display: block;
+        position: absolute;
+        top: 38px;
+        right: -50%;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(0, 245, 255, .25), transparent);
+        z-index: 0;
+      }
+    }
+
+    /* Container do ícone SVG com tom rosa/magenta */
+    .step__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(255, 60, 172, .08);
+      border: 1px solid rgba(255, 60, 172, .18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ff3cac;
+      margin-bottom: 12px;
+    }
+    .step__icon svg { width: 20px; height: 20px; }
+
+    /* Kicker dentro do section__head recebe espaçamento inferior extra */
+    .section__head .kicker { margin-bottom: 10px; }
+
+
+    /* ────────────────────────────────────────────────────────
+       PLATFORM SOLO — Layout centralizado (sem coluna direita)
+       Substitui o antigo layout de 2 colunas (platform__left
+       + platform__right) pela versão sem o chat mock ao lado.
+    ──────────────────────────────────────────────────────── */
+    .platform__solo {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    /* CTAs centralizados via justify-content */
+    .platform__solo .hero__cta {
+      justify-content: center;
+      margin-top: 36px;
+    }
+    .platform__solo .section__title { margin-bottom: 12px; }
+    .platform__solo .section__desc {
+      max-width: 560px;
+      margin: 0 auto 32px;
+    }
+
+    /* Grid 2×2 dos bullet points */
+    .platform__bullets-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin: 0 auto 8px;
+      max-width: 640px;
+    }
+
+    /* Card individual de bullet com hover interativo */
+    .platform__bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .09);
+      text-align: left;
+      transition: border-color .15s, background .15s, transform .15s;
+    }
+    .platform__bullet:hover {
+      border-color: rgba(0, 245, 255, .22);
+      background: rgba(0, 245, 255, .05);
+      transform: translateY(-2px);
+    }
+
+    /* Ícone do bullet: caixa pequena com borda/fundo ciano */
+    .platform__bullet-icon {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      background: rgba(0, 245, 255, .08);
+      border: 1px solid rgba(0, 245, 255, .16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00f5ff;
+    }
+    .platform__bullet-icon svg { width: 18px; height: 18px; }
+
+    /* Textos do bullet: nome em branco, descrição em muted */
+    .platform__bullet b {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      color: rgba(243, 244, 255, .90);
+      margin-bottom: 3px;
+    }
+    .platform__bullet span {
+      font-size: 12px;
+      color: rgba(243, 244, 255, .45);
+    }
+
+
+    /* ────────────────────────────────────────────────────────
+       RESPONSIVIDADE MOBILE (< 600px)
+    ──────────────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      /* Bullets empilham em coluna única */
+      .platform__bullets-grid { grid-template-columns: 1fr; }
+      /* Belt sem gap e divisórias ocultas para caber na tela */
+      .belt { gap: 0; }
+      .belt__item { padding: 8px 20px; }
+      .belt__divider { display: none; }
+    }
+
+  </style>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SCRIPTS
+       main.js inclui:
+       - Animação de partículas no canvas
+       - Scroll reveal (IntersectionObserver)
+       - Mobile drawer (open/close)
+       - Gerador de plano IA (copilot da home, conecta ao backend)
+  ══════════════════════════════════════════════════════════ -->
+  <script src="./scripts/main.js"></script>
+
+</body>
+</html>

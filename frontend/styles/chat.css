@@ -1,0 +1,530 @@
+/* ============================================================
+   chat.css — CloudOps Copilot — Página de Chat IA
+   Estilo premium Web3, consistente com main.css.
+
+   ESTRUTURA DO ARQUIVO:
+   1. Nav link ativo
+   2. Hero da página de chat
+   3. Tópicos rápidos (topic-cards com ícones SVG)   ← ALTERADO
+   4. Janela principal do chat
+   5. Área de input e botão de envio
+   6. Responsividade mobile
+   ============================================================ */
+
+
+/* ============================================================
+   1. NAV LINK ATIVO
+   Destaca o item "Chat IA" na topbar quando estamos nesta página.
+   Aplica fundo azulado e borda ciano sobre o estilo base do nav.
+   ============================================================ */
+.nav__link--active {
+  background: rgba(0, 245, 255, .10);
+  border-color: rgba(0, 245, 255, .22) !important;
+  color: #00f5ff !important;
+}
+
+
+/* ============================================================
+   2. HERO DA PÁGINA DE CHAT
+   Área de cabeçalho com título, descrição e mini-stats.
+   ============================================================ */
+
+/* Garante que a página ocupe 100% da altura da viewport */
+.chat-page {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* Espaçamento do hero: 100px no topo (compensa a topbar fixa) */
+.chat-hero { padding: 100px 0 32px; }
+
+/* Layout flex: texto à esquerda, stats à direita */
+.chat-hero__inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+/* Título do hero com tamanho fluido (clamp responsivo) */
+.chat-hero__title {
+  margin: 14px 0 10px;
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1.06;
+  letter-spacing: -0.6px;
+}
+
+/* Descrição em tom muted, largura máxima para legibilidade */
+.chat-hero__desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+  max-width: 580px;
+}
+
+/* Container das stat pills (Modelo, Idioma, Memória) */
+.chat-hero__stats {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Cada pill de stat: glassmorphism leve */
+.chat-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 20px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .10);
+  backdrop-filter: blur(12px);
+  min-width: 80px;
+  text-align: center;
+}
+.chat-stat b    { font-size: 14px; font-weight: 800; color: #fff; line-height: 1.2; }
+.chat-stat span { font-size: 11px; color: rgba(243, 244, 255, .55); margin-top: 4px; }
+
+
+/* ============================================================
+   3. TÓPICOS RÁPIDOS (topic-cards)
+   ── ALTERAÇÃO APLICADA ──
+   Os ícones antes eram emojis (font-size: 22px).
+   Agora são SVGs dentro de um container estilizado com:
+   - width/height fixos (40×40px) para consistência
+   - border-radius: 12px para cantos arredondados
+   - fundo e borda ciano semitransparentes
+   - display:flex para centralizar o SVG filho
+   ============================================================ */
+
+/* Seção de tópicos: espaçamento inferior */
+.chat-topics { padding: 0 0 28px; }
+
+/* Grid de 8 colunas para os topic-cards */
+.chat-topics__grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+}
+
+/* Card de tópico: botão com layout flex em coluna */
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 10px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .09);
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+  color: var(--text);
+  font-family: inherit;
+}
+
+/* Hover: levita, borda ciano e sombra suave */
+.topic-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, .08);
+  border-color: rgba(0, 245, 255, .22);
+  box-shadow: 0 10px 40px rgba(0, 245, 255, .08);
+}
+
+/* Ícone do ícone do ícone do topic-card também brilha no hover */
+.topic-card:hover .topic-card__icon {
+  background: rgba(0, 245, 255, .15);
+  box-shadow: 0 0 16px rgba(0, 245, 255, .18);
+}
+
+/* ── CONTAINER DO ÍCONE SVG (ALTERADO) ──────────────────────
+   Antes: apenas font-size: 22px (para emojis)
+   Depois: caixa 40×40px com estilo neon ciano para SVGs
+   O SVG filho (20×20px) é centralizado via flexbox.
+   ──────────────────────────────────────────────────────── */
+.topic-card__icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(0, 245, 255, .08);
+  border: 1px solid rgba(0, 245, 255, .15);
+  color: #00f5ff;
+  flex-shrink: 0;
+  transition: background .15s, box-shadow .15s;
+}
+
+/* SVG filho: tamanho fixo e display:block para evitar espaço extra */
+.topic-card__icon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Label de texto abaixo do ícone */
+.topic-card__label {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(243, 244, 255, .80);
+  text-align: center;
+  line-height: 1.3;
+}
+
+
+/* ============================================================
+   4. JANELA PRINCIPAL DO CHAT
+   Container com glassmorphism, altura fixa e scroll interno.
+   ============================================================ */
+
+/* Espaçamento inferior da seção de chat */
+.chat-main { padding: 0 0 80px; }
+
+/* Janela: glassmorphism com borda sutil e sombra profunda */
+.chat-window {
+  border-radius: 24px;
+  background: rgba(10, 10, 18, .38);
+  border: 1px solid rgba(255, 255, 255, .10);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, .50);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+}
+
+/* ── Cabeçalho da janela ───────────────────────────────────── */
+.chat-window__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: rgba(0, 0, 0, .20);
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  flex-shrink: 0; /* não encolhe quando o chat tem muitas mensagens */
+}
+
+/* Status bar: dot colorido + texto descritivo */
+.chat-window__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(243, 244, 255, .75);
+}
+
+/* Dot de status: cinza por padrão */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .30);
+  transition: background .3s ease, box-shadow .3s ease;
+}
+/* Verde pulsante quando online */
+.status-dot.online {
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, .6);
+}
+/* Vermelho quando há erro de conexão */
+.status-dot.error {
+  background: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, .5);
+}
+
+/* Botão de limpar conversa */
+.chat-clear {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .10);
+  background: rgba(255, 255, 255, .05);
+  color: rgba(243, 244, 255, .65);
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.chat-clear:hover {
+  border-color: rgba(239, 68, 68, .35);
+  color: #ef4444;
+  background: rgba(239, 68, 68, .08);
+}
+
+/* ── Área de mensagens (scrollável) ────────────────────────── */
+.chat-messages {
+  flex: 1;               /* ocupa todo o espaço restante entre header e input */
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar customizada (webkit) */
+.chat-messages::-webkit-scrollbar       { width: 4px; }
+.chat-messages::-webkit-scrollbar-track { background: transparent; }
+.chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, .12);
+  border-radius: 999px;
+}
+
+/* ── Mensagem base ─────────────────────────────────────────── */
+.chat-msg {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  animation: msgIn .25s ease forwards; /* entrada suave de baixo */
+}
+
+/* Animação de entrada das mensagens */
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Mensagens do usuário ficam alinhadas à direita */
+.chat-msg--user { flex-direction: row-reverse; }
+
+/* Avatar: ícone circular para bot e usuário */
+.chat-msg__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .10);
+}
+
+/* Avatar do usuário: gradiente rosa/laranja */
+.chat-msg--user .chat-msg__avatar {
+  background: linear-gradient(135deg, rgba(255, 60, 172, .35), rgba(255, 106, 0, .25));
+  border-color: rgba(255, 60, 172, .25);
+}
+
+/* Bolha de mensagem base */
+.chat-msg__bubble {
+  max-width: 72%;
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(243, 244, 255, .92);
+}
+
+/* Bolha do bot: fundo neutro, canto superior esquerdo reto */
+.chat-msg--bot .chat-msg__bubble {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .09);
+  border-radius: 4px 18px 18px 18px;
+}
+
+/* Bolha do usuário: gradiente rosa, canto superior direito reto */
+.chat-msg--user .chat-msg__bubble {
+  background: linear-gradient(135deg, rgba(255, 60, 172, .22), rgba(255, 106, 0, .18));
+  border: 1px solid rgba(255, 60, 172, .20);
+  border-radius: 18px 4px 18px 18px;
+  text-align: right;
+}
+
+/* Estilos do conteúdo Markdown dentro das bolhas */
+.chat-msg__bubble p            { margin: 0 0 8px; }
+.chat-msg__bubble p:last-child { margin-bottom: 0; }
+.chat-msg__bubble ul           { margin: 6px 0; padding-left: 18px; }
+.chat-msg__bubble li           { margin-bottom: 4px; }
+.chat-msg__bubble strong       { color: #fff; }
+
+/* Código inline: fundo ciano semitransparente */
+.chat-msg__bubble code {
+  background: rgba(0, 245, 255, .10);
+  border: 1px solid rgba(0, 245, 255, .15);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 12px;
+  color: #00f5ff;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Bloco de código com scroll horizontal */
+.chat-msg__bubble pre {
+  background: rgba(0, 0, 0, .35);
+  border: 1px solid rgba(255, 255, 255, .10);
+  border-radius: 10px;
+  padding: 12px 14px;
+  overflow-x: auto;
+  margin: 8px 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+/* Código dentro de pre: sem fundo duplo */
+.chat-msg__bubble pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #a5f3fc;
+}
+
+/* Timestamp da mensagem */
+.chat-msg__time {
+  font-size: 10px;
+  color: rgba(243, 244, 255, .35);
+  margin-top: 4px;
+  align-self: flex-end;
+  flex-shrink: 0;
+}
+
+/* ── Indicador de digitação (typing dots) ──────────────────── */
+.chat-msg--typing .chat-msg__bubble { padding: 14px 18px; }
+
+.typing-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+/* 3 pontinhos com animação de bounce sequencial */
+.typing-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(0, 245, 255, .60);
+  animation: typingBounce 1.2s ease infinite;
+}
+.typing-dots span:nth-child(2) { animation-delay: .2s; }
+.typing-dots span:nth-child(3) { animation-delay: .4s; }
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0);   opacity: .5; }
+  30%            { transform: translateY(-6px); opacity: 1; }
+}
+
+
+/* ============================================================
+   5. ÁREA DE INPUT E BOTÃO DE ENVIO
+   Fica fixo na base da janela de chat.
+   ============================================================ */
+
+/* Container inferior com borda e fundo escuro */
+.chat-input-area {
+  padding: 14px 16px 16px;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  background: rgba(0, 0, 0, .15);
+  flex-shrink: 0; /* não encolhe com o scroll das mensagens */
+}
+
+/* Layout flex: textarea + botão de envio lado a lado */
+.chat-input-wrap {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+/* Textarea de input */
+.chat-input {
+  flex: 1;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 16px;
+  color: rgba(243, 244, 255, .92);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.55;
+  padding: 12px 16px;
+  resize: none;
+  outline: none;
+  max-height: 120px; /* limite para não crescer demais */
+  transition: border-color .15s ease, box-shadow .15s ease;
+  overflow-y: auto;
+}
+.chat-input::placeholder { color: rgba(243, 244, 255, .40); }
+/* Foco: borda + glow ciano interno */
+.chat-input:focus {
+  border-color: rgba(0, 245, 255, .25);
+  box-shadow: 0 0 0 1px rgba(0, 245, 255, .12) inset;
+}
+
+/* Botão de envio: círculo com gradiente neon */
+.chat-send {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: none;
+  background: var(--grad);
+  color: #0b0a12;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+  box-shadow: 0 8px 30px rgba(255, 60, 172, .20);
+}
+.chat-send svg { width: 18px; height: 18px; }
+
+/* Hover: levita, saturação extra e sombra ampliada */
+.chat-send:hover {
+  transform: translateY(-2px) scale(1.05);
+  filter: saturate(1.15);
+  box-shadow: 0 12px 40px rgba(255, 60, 172, .30);
+}
+
+/* Desabilitado durante o carregamento */
+.chat-send:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Linha de dica abaixo do input: atalhos e contador de caracteres */
+.chat-input-hint {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 11px;
+  color: rgba(243, 244, 255, .35);
+  padding: 0 2px;
+}
+
+
+/* ============================================================
+   6. RESPONSIVIDADE MOBILE
+   ============================================================ */
+
+/* Tablet: reduz o grid de tópicos para 4 colunas */
+@media (max-width: 980px) {
+  .chat-topics__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  /* Hero em coluna única */
+  .chat-hero__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  /* Stats podem quebrar linha */
+  .chat-hero__stats { flex-wrap: wrap; }
+}
+
+/* Mobile: 2 colunas de tópicos, janela menor, bolhas mais largas */
+@media (max-width: 600px) {
+  .chat-topics__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .chat-window {
+    height: 520px;
+    border-radius: 18px;
+  }
+  .chat-msg__bubble {
+    max-width: 88%; /* mais espaço em telas pequenas */
+  }
+}

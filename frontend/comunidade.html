@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CloudOps Copilot — Comunidade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/main.css" />
+  <link rel="stylesheet" href="./styles/comunidade.css" />
+</head>
+<body>
+
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark"></span>
+      <span class="brand__text"><b>CloudOps Copilot</b><small>IA + Cloud + Automação</small></span>
+    </a>
+    <nav class="nav">
+      <a class="nav__link" href="index.html">Home</a>
+      <a class="nav__link" href="index.html#features">Features</a>
+      <a class="nav__link" href="index.html#assets">Assets</a>
+      <a class="nav__link" href="chat.html">Chat IA</a>
+      <a class="nav__link nav__link--active" href="comunidade.html">Comunidade</a>
+      <a class="nav__link nav__pill" href="http://127.0.0.1:8000/docs" target="_blank">API Docs</a>
+    </nav>
+    <button class="nav__menu" id="menuBtn">&#9776;</button>
+  </header>
+
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer__panel">
+      <div class="drawer__head">
+        <span class="drawer__title">Menu</span>
+        <button class="drawer__close" id="menuClose">&#x2715;</button>
+      </div>
+      <a class="drawer__link" href="index.html">Home</a>
+      <a class="drawer__link" href="index.html#features">Features</a>
+      <a class="drawer__link" href="index.html#assets">Assets</a>
+      <a class="drawer__link" href="chat.html">Chat IA</a>
+      <a class="drawer__link" href="comunidade.html">Comunidade</a>
+      <a class="drawer__link" href="http://127.0.0.1:8000/docs" target="_blank">API Docs</a>
+      <div class="drawer__foot"><span class="chip">Web3 &#8226; CloudOps &#8226; Neon UI</span></div>
+    </div>
+    <div class="drawer__backdrop" id="drawerBackdrop"></div>
+  </aside>
+
+  <main class="com-page">
+
+    <!-- HERO -->
+    <section class="com-hero">
+      <div class="container">
+        <div class="com-hero__layout">
+          <div class="com-hero__left">
+            <div class="kicker">
+              <span class="kicker__dot"></span>
+              <span>Comunidade CloudOps</span>
+              <span class="kicker__sep">&#8226;</span>
+              <span>Aberta a todos</span>
+            </div>
+            <h1 class="com-hero__title">
+              Sua voz<br/>
+              <span class="grad">constrói o projeto</span>
+            </h1>
+            <p class="com-hero__desc">
+              Sugestões, feedbacks e ideias da comunidade moldam o futuro do CloudOps Copilot.
+              Vote, contribua e acompanhe a evolução em tempo real.
+            </p>
+            <div class="com-stats">
+              <div class="com-stat">
+                <b id="statTotal">0</b>
+                <span>Contribuições</span>
+              </div>
+              <div class="com-stat">
+                <b id="statVotes">0</b>
+                <span>Votos</span>
+              </div>
+              <div class="com-stat">
+                <b id="statToday">0</b>
+                <span>Hoje</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Painel de envio integrado no hero -->
+          <div class="com-hero__right">
+            <div class="com-form-card">
+              <div class="com-form-card__header">
+                <div class="com-form-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                </div>
+                <div>
+                  <h2>Deixar contribuição</h2>
+                  <p>Sugestão, bug, ideia ou feedback</p>
+                </div>
+              </div>
+
+              <div class="com-form-body">
+                <!-- Tipo -->
+                <div class="com-field">
+                  <label class="com-label">Tipo</label>
+                  <div class="com-type-btns" id="typeBtns">
+                    <button class="com-type-btn is-active" data-type="sugestão">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                      Sugestão
+                    </button>
+                    <button class="com-type-btn" data-type="feedback">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                      Feedback
+                    </button>
+                    <button class="com-type-btn" data-type="bug">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6l4-4 4 4M12 2v8"/><path d="M20.24 12.24a6 6 0 00-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="13" x2="2" y2="13"/><line x1="21" y1="15" x2="3" y2="15"/></svg>
+                      Bug
+                    </button>
+                    <button class="com-type-btn" data-type="ideia">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                      Ideia
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Nome -->
+                <div class="com-field">
+                  <label class="com-label" for="comName">Nome <span class="com-optional">(opcional)</span></label>
+                  <input id="comName" class="com-input" type="text" placeholder="Como devemos te chamar?" maxlength="40" autocomplete="off"/>
+                </div>
+
+                <!-- Mensagem -->
+                <div class="com-field">
+                  <label class="com-label" for="comMsg">Mensagem</label>
+                  <textarea id="comMsg" class="com-input com-textarea" rows="3" placeholder="Descreva sua sugestão, ideia ou feedback..." maxlength="400"></textarea>
+                  <span class="com-char" id="comChar">0 / 400</span>
+                </div>
+
+                <!-- Humor com SVG -->
+                <div class="com-field">
+                  <label class="com-label">Sentimento</label>
+                  <div class="com-mood" id="moodBtns">
+                    <button class="com-mood-btn" data-mood="love" title="Amei">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    </button>
+                    <button class="com-mood-btn" data-mood="fire" title="Incrível">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2c0 6-6 8-6 14a6 6 0 0012 0c0-6-6-8-6-14z"/><path d="M12 12c0 3-2 4-2 6a2 2 0 004 0c0-2-2-3-2-6z"/></svg>
+                    </button>
+                    <button class="com-mood-btn is-active" data-mood="ok" title="Gostei">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                    </button>
+                    <button class="com-mood-btn" data-mood="think" title="Neutro">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                    </button>
+                    <button class="com-mood-btn" data-mood="bad" title="Frustrado">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <button class="com-submit" id="comSubmit">
+                  <span id="submitLabel">Enviar contribuição</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEED -->
+    <section class="com-feed-section">
+      <div class="container">
+        <div class="com-filters">
+          <div class="com-filters__left">
+            <h2 class="com-feed-title">Contribuições da comunidade</h2>
+          </div>
+          <div class="com-filters__right" id="filterBtns">
+            <button class="com-filter is-active" data-filter="all">Todas</button>
+            <button class="com-filter" data-filter="sugestão">Sugestões</button>
+            <button class="com-filter" data-filter="feedback">Feedbacks</button>
+            <button class="com-filter" data-filter="bug">Bugs</button>
+            <button class="com-filter" data-filter="ideia">Ideias</button>
+          </div>
+        </div>
+
+        <div class="com-feed" id="comFeed">
+          <div class="com-empty" id="comEmpty">
+            <div class="com-empty__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg>
+            </div>
+            <p>Ainda não há contribuições.<br/>Seja o primeiro a contribuir!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast -->
+  <div class="com-toast" id="comToast">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toastMsg">Contribuição enviada!</span>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__divider"></div>
+    <div class="container footer__grid">
+      <div>
+        <b class="footer__brand">CloudOps Copilot</b>
+        <p class="footer__text">Construído com a comunidade, para a comunidade.</p>
+      </div>
+      <div class="footer__links">
+        <a href="index.html">Home</a>
+        <a href="chat.html">Chat IA</a>
+        <a href="comunidade.html">Comunidade</a>
+      </div>
+      <div class="footer__credits">
+        <span>&#169; CloudOps Copilot &#8212; Guilherme &amp; Gabriel Moraes Franco</span>
+        <small>UI &#8226; Cloud &#8226; Portfolio &#8226; Web3 aesthetic</small>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./scripts/main.js"></script>
+  <script src="./scripts/comunidade.js"></script>
+</body>
+</html>
