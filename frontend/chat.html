@@ -4,39 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CloudOps Copilot — Chat IA</title>
-
-  <!-- ══════════════════════════════════════════════════════════
-       FONTES — Google Fonts Inter (400 → 900)
-       Mesma fonte do restante do projeto para consistência.
-  ══════════════════════════════════════════════════════════ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <!-- ══════════════════════════════════════════════════════════
-       ESTILOS
-       main.css  → reset, variáveis globais, topbar, footer, etc.
-       chat.css  → estilos específicos da página de chat
-                   (hero, topic-cards com SVG, janela do chat,
-                    input area, typing indicator)
-  ══════════════════════════════════════════════════════════ -->
   <link rel="stylesheet" href="./styles/main.css" />
   <link rel="stylesheet" href="./styles/chat.css" />
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════════════════════
-       CANVAS DE PARTÍCULAS
-       Renderizado em main.js. Fica no fundo via z-index CSS.
-       aria-hidden="true" → ignorado por leitores de tela.
-  ══════════════════════════════════════════════════════════ -->
   <canvas id="particles" aria-hidden="true"></canvas>
 
-
-  <!-- ══════════════════════════════════════════════════════════
-       TOPBAR — Barra de navegação fixa no topo
-       .nav__link--active → destaca "Chat IA" como página atual
-  ══════════════════════════════════════════════════════════ -->
   <header class="topbar">
     <a class="brand" href="index.html" aria-label="CloudOps Copilot Home">
       <span class="brand__mark" aria-hidden="true"></span>
@@ -45,27 +22,19 @@
         <small>IA + Cloud + Automação</small>
       </span>
     </a>
-
     <nav class="nav">
       <a class="nav__link" href="index.html">Home</a>
-      <a class="nav__link" href="index.html#features">Features</a>
-      <a class="nav__link" href="index.html#assets">Assets</a>
-      <a class="nav__link" href="index.html#how">How it works</a>
-      <!-- Chat IA marcado como ativo para esta página -->
+      <a class="nav__link" href="index.html#features">Funcionalidades</a>
+      <a class="nav__link" href="index.html#assets">Tecnologias</a>
+      <a class="nav__link" href="index.html#how">Como funciona</a>
       <a class="nav__link nav__link--active" href="chat.html">Chat IA</a>
       <a class="nav__link" href="comunidade.html">Comunidade</a>
+      <a class="nav__link" href="quem-somos.html">Quem somos</a>
       <a class="nav__link nav__pill" href="http://127.0.0.1:8000/docs" target="_blank" rel="noreferrer">API Docs</a>
     </nav>
-
-    <!-- Hambúrguer: visível apenas no mobile -->
     <button class="nav__menu" id="menuBtn" aria-label="Abrir menu">&#9776;</button>
   </header>
 
-
-  <!-- ══════════════════════════════════════════════════════════
-       DRAWER — Menu lateral para mobile
-       Controlado em main.js via #menuBtn / #menuClose / backdrop.
-  ══════════════════════════════════════════════════════════ -->
   <aside class="drawer" id="drawer" aria-hidden="true">
     <div class="drawer__panel">
       <div class="drawer__head">
@@ -73,225 +42,132 @@
         <button class="drawer__close" id="menuClose" aria-label="Fechar">&#x2715;</button>
       </div>
       <a class="drawer__link" href="index.html">Home</a>
-      <a class="drawer__link" href="index.html#features">Features</a>
-      <a class="drawer__link" href="index.html#assets">Assets</a>
-      <a class="drawer__link" href="index.html#how">How it works</a>
+      <a class="drawer__link" href="index.html#features">Funcionalidades</a>
+      <a class="drawer__link" href="index.html#assets">Tecnologias</a>
+      <a class="drawer__link" href="index.html#how">Como funciona</a>
       <a class="drawer__link" href="chat.html">Chat IA</a>
       <a class="drawer__link" href="comunidade.html">Comunidade</a>
+      <a class="drawer__link" href="quem-somos.html">Quem somos</a>
       <a class="drawer__link" href="http://127.0.0.1:8000/docs" target="_blank">API Docs</a>
       <div class="drawer__foot"><span class="chip">Web3 • CloudOps • Neon UI</span></div>
     </div>
-    <!-- Backdrop escuro: clique fora fecha o drawer -->
     <div class="drawer__backdrop" id="drawerBackdrop"></div>
   </aside>
 
-
-  <!-- ══════════════════════════════════════════════════════════
-       MAIN — Conteúdo principal da página de chat
-  ══════════════════════════════════════════════════════════ -->
   <main class="chat-page">
 
-
-    <!-- ════════════════════════════════════════════════════════
-         SEÇÃO 1 — HERO DO CHAT
-         Exibe o título da página, descrição do copilot e
-         3 mini-stats: modelo, idioma e tipo de memória.
-    ════════════════════════════════════════════════════════ -->
     <section class="chat-hero">
       <div class="container">
         <div class="chat-hero__inner">
-
-          <!-- Coluna de texto -->
           <div class="chat-hero__text">
-            <!-- Kicker: indicador de contexto acima do H1 -->
             <div class="kicker">
               <span class="kicker__dot"></span>
               <span>CloudOps Copilot IA</span>
               <span class="kicker__sep">•</span>
               <span>Powered by GPT-4o-mini</span>
             </div>
-
-            <!-- H1 com parte do texto em gradiente neon -->
             <h1 class="chat-hero__title">
               Seu assistente de<br/>
               <span class="grad">Cloud &amp; DevOps</span>
             </h1>
-
-            <!-- Descrição das capacidades do copilot -->
             <p class="chat-hero__desc">
               Pergunte qualquer coisa sobre Deploy, Segurança, Kubernetes, CI/CD, Custos AWS e muito mais.
               O copilot lembra o contexto da conversa e entrega respostas técnicas precisas.
             </p>
           </div>
-
-          <!-- Mini-stats à direita: modelo, idioma, memória -->
           <div class="chat-hero__stats">
             <div class="chat-stat"><b>GPT-4o-mini</b><span>Modelo</span></div>
             <div class="chat-stat"><b>PT-BR</b><span>Idioma</span></div>
             <div class="chat-stat"><b>Multi-turno</b><span>Memória</span></div>
           </div>
-
         </div>
       </div>
-    </section><!-- /HERO DO CHAT -->
+    </section>
 
-
-    <!-- ════════════════════════════════════════════════════════
-         SEÇÃO 2 — TÓPICOS RÁPIDOS (topic-cards)
-         ── ALTERAÇÃO APLICADA ──
-         Cada botão agora tem um ícone SVG dentro de um
-         container estilizado (.topic-card__icon) em vez de
-         um emoji. O CSS em chat.css define o tamanho (40×40px),
-         borda ciano e efeito de brilho no hover.
-
-         data-prompt → texto pré-preenchido no chat ao clicar.
-         O chat.js captura esse atributo e dispara o envio.
-    ════════════════════════════════════════════════════════ -->
+    <!-- Tópicos rápidos com SVG futuristas -->
     <section class="chat-topics">
       <div class="container">
         <div class="chat-topics__grid">
 
-          <!-- Tópico 1: Deploy AWS (ícone de layers/stack) -->
           <button class="topic-card" data-prompt="Como fazer deploy de uma aplicação React na AWS com S3 e CloudFront?">
             <span class="topic-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
             </span>
             <span class="topic-card__label">Deploy AWS</span>
           </button>
 
-          <!-- Tópico 2: Security (ícone de escudo) -->
           <button class="topic-card" data-prompt="Como proteger minha API pública contra ataques DDoS na AWS?">
             <span class="topic-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </span>
             <span class="topic-card__label">Security</span>
           </button>
 
-          <!-- Tópico 3: CI/CD (ícone de sol/engrenagem) -->
           <button class="topic-card" data-prompt="Como configurar um pipeline CI/CD com GitHub Actions para AWS?">
             <span class="topic-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
             </span>
             <span class="topic-card__label">CI/CD</span>
           </button>
 
-          <!-- Tópico 4: Custos (ícone de cifrão) -->
           <button class="topic-card" data-prompt="Como reduzir custos na AWS sem perder performance?">
             <span class="topic-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <line x1="12" y1="1" x2="12" y2="23"/>
-                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
             </span>
             <span class="topic-card__label">Custos</span>
           </button>
 
-          <!-- Tópico 5: Observabilidade (ícone de heartbeat) -->
           <button class="topic-card" data-prompt="Como configurar monitoramento e alertas com CloudWatch?">
             <span class="topic-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </span>
             <span class="topic-card__label">Observabilidade</span>
           </button>
 
-          <!-- Tópico 6: Kubernetes (ícone de círculo com info) -->
           <button class="topic-card" data-prompt="Como criar um cluster Kubernetes na AWS com EKS?">
             <span class="topic-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="8" x2="12" y2="12"/>
-                <line x1="12" y1="16" x2="12.01" y2="16"/>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             </span>
             <span class="topic-card__label">Kubernetes</span>
           </button>
 
-          <!-- Tópico 7: Serverless (ícone de raio/lightning) -->
           <button class="topic-card" data-prompt="Como configurar funções serverless com AWS Lambda?">
             <span class="topic-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             </span>
             <span class="topic-card__label">Serverless</span>
           </button>
 
-          <!-- Tópico 8: Database (ícone de cilindro/banco de dados) -->
           <button class="topic-card" data-prompt="Como configurar banco de dados RDS com alta disponibilidade na AWS?">
             <span class="topic-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <ellipse cx="12" cy="5" rx="9" ry="3"/>
-                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
-                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
             </span>
             <span class="topic-card__label">Database</span>
           </button>
 
         </div>
       </div>
-    </section><!-- /TÓPICOS RÁPIDOS -->
+    </section>
 
-
-    <!-- ════════════════════════════════════════════════════════
-         SEÇÃO 3 — JANELA PRINCIPAL DO CHAT
-         Componente de chat completo com:
-         - Header: status do servidor + botão de limpar
-         - Body: lista de mensagens com scroll automático
-         - Footer: textarea de input + botão de envio
-
-         Toda a lógica está em chat.js.
-    ════════════════════════════════════════════════════════ -->
     <section class="chat-main">
       <div class="container">
         <div class="chat-window">
 
-
-          <!-- ── Header da janela de chat ─────────────────── -->
           <div class="chat-window__header">
-
-            <!-- Status do servidor: dot colorido + texto descritivo
-                 Controlado por chat.js → setStatus('online'|'error', texto) -->
             <div class="chat-window__status">
               <span class="status-dot" id="statusDot"></span>
               <span id="statusText">Conectando...</span>
             </div>
-
-            <!-- Botão de limpar: remove todas as mensagens exceto a de boas-vindas
-                 e reseta o histórico de contexto em chat.js -->
             <button class="chat-clear" id="clearBtn" title="Limpar conversa">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="3 6 5 6 21 6"/>
-                <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
               Limpar
             </button>
           </div>
 
-
-          <!-- ── Área de mensagens (scrollável) ───────────── -->
-          <!-- chat.js adiciona mensagens aqui dinamicamente via DOM -->
           <div class="chat-messages" id="chatMessages">
-
-            <!-- Mensagem de boas-vindas: sempre presente,
-                 não é removida pelo botão de limpar (index 0) -->
             <div class="chat-msg chat-msg--bot">
               <div class="chat-msg__avatar">
-                <!-- Ícone SVG do bot (robô) -->
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="3" y="11" width="18" height="10" rx="2"/>
-                  <circle cx="12" cy="5" r="2"/>
-                  <path d="M12 7v4M8 15h.01M16 15h.01"/>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 15h.01M16 15h.01"/></svg>
               </div>
               <div class="chat-msg__bubble">
                 <p>Olá! Sou o <strong>CloudOps Copilot</strong> — seu assistente de Cloud &amp; DevOps.</p>
@@ -300,98 +176,50 @@
               </div>
               <div class="chat-msg__time">Agora</div>
             </div>
+          </div>
 
-          </div><!-- /chat-messages -->
-
-
-          <!-- ── Área de input (textarea + envio) ─────────── -->
           <div class="chat-input-area">
-
             <div class="chat-input-wrap">
-              <!-- Textarea: auto-resize via chat.js ao digitar
-                   Enter → envia | Shift+Enter → nova linha -->
-              <textarea
-                id="chatInput"
-                class="chat-input"
-                placeholder="Pergunte sobre Deploy, Security, Kubernetes, CI/CD..."
-                rows="1"
-                autocomplete="off"
-              ></textarea>
-
-              <!-- Botão de envio com ícone SVG de "seta de envio"
-                   Desabilitado durante o carregamento (chat.js) -->
+              <textarea id="chatInput" class="chat-input" placeholder="Pergunte sobre Deploy, Security, Kubernetes, CI/CD..." rows="1" autocomplete="off"></textarea>
               <button id="sendBtn" class="chat-send" aria-label="Enviar">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                   <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/>
                 </svg>
               </button>
             </div>
-
-            <!-- Dica de atalhos + contador de caracteres (0/500)
-                 O contador é atualizado em tempo real por chat.js -->
             <div class="chat-input-hint">
               <span>Enter para enviar &bull; Shift+Enter para nova linha</span>
               <span id="charCount">0 / 500</span>
             </div>
+          </div>
 
-          </div><!-- /chat-input-area -->
-
-
-        </div><!-- /chat-window -->
+        </div>
       </div>
-    </section><!-- /JANELA DO CHAT -->
+    </section>
 
+  </main>
 
-  </main><!-- /chat-page -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       FOOTER
-       Grid de 3 colunas: brand | links | créditos.
-       Compartilhado com as demais páginas do projeto.
-  ══════════════════════════════════════════════════════════ -->
   <footer class="footer">
     <div class="footer__divider"></div>
     <div class="container footer__grid">
-
-      <!-- Coluna 1: marca e tagline -->
       <div>
         <b class="footer__brand">CloudOps Copilot</b>
         <p class="footer__text">IA especialista em Cloud &amp; DevOps — powered by OpenAI.</p>
       </div>
-
-      <!-- Coluna 2: links de navegação rápida -->
       <div class="footer__links">
         <a href="index.html">Home</a>
         <a href="index.html#features">Features</a>
         <a href="comunidade.html">Comunidade</a>
         <a href="chat.html">Chat IA</a>
       </div>
-
-      <!-- Coluna 3: créditos dos autores -->
       <div class="footer__credits">
         <span>&#169; CloudOps Copilot &#8212; Guilherme &amp; Gabriel Moraes Franco</span>
         <small>UI &#8226; Cloud &#8226; Portfolio &#8226; Web3 aesthetic</small>
       </div>
-
     </div>
   </footer>
 
-
-  <!-- ══════════════════════════════════════════════════════════
-       SCRIPTS
-       main.js  → partículas, scroll reveal, mobile drawer
-       chat.js  → lógica completa do chat:
-                  - checkStatus: testa conexão com o backend
-                  - sendMessage: POST /chat com histórico
-                  - addUserMessage / addBotMessage: DOM
-                  - addTyping / removeTyping: indicador de "..."
-                  - parseMarkdown: converte md → HTML básico
-                  - auto-resize do textarea
-                  - topic-cards: clique preenche e envia
-  ══════════════════════════════════════════════════════════ -->
   <script src="./scripts/main.js"></script>
   <script src="./scripts/chat.js"></script>
-
 </body>
 </html>

@@ -6,7 +6,7 @@
   <title>CloudOps Copilot — Web3 Futuristic Landing</title>
 
   <!-- ══════════════════════════════════════════════════════════
-       FONTES — Google Fonts Inter (400 → 900)
+       FONTES — Google Fonts Inter (400 → 900)  
        Usada em todo o projeto para tipografia consistente.
        preconnect acelera o carregamento da fonte.
   ══════════════════════════════════════════════════════════ -->
@@ -53,12 +53,12 @@
 
     <nav class="nav">
       <a class="nav__link nav__link--active" href="index.html">Home</a>
-      <a class="nav__link" href="#features">Features</a>
-      <a class="nav__link" href="#assets">Assets</a>
-      <a class="nav__link" href="#how">How it works</a>
+      <a class="nav__link" href="#features">Funcionalidades</a>
+      <a class="nav__link" href="#assets">Tecnologias</a>
+      <a class="nav__link" href="#how">Como funciona</a>
       <a class="nav__link" href="chat.html">Chat IA</a>
       <a class="nav__link" href="comunidade.html">Comunidade</a>
-      <!-- Abre a documentação automática do FastAPI em nova aba -->
+      <a class="nav__link" href="quem-somos.html">Quem somos</a>
       <a class="nav__link nav__pill" href="http://127.0.0.1:8001/docs" target="_blank" rel="noreferrer">API Docs</a>
     </nav>
 
@@ -81,14 +81,14 @@
         <button class="drawer__close" id="menuClose" aria-label="Fechar">✕</button>
       </div>
 
-      <!-- Links espelham a navbar desktop -->
-      <a class="drawer__link" href="index.html">🏠 Home</a>
-      <a class="drawer__link" href="#features">⚡ Features</a>
-      <a class="drawer__link" href="#assets">🎨 Assets</a>
-      <a class="drawer__link" href="#how">⚙️ How it works</a>
-      <a class="drawer__link" href="chat.html">🤖 Chat IA</a>
-      <a class="drawer__link" href="comunidade.html">🌐 Comunidade</a>
-      <a class="drawer__link" href="http://127.0.0.1:8001/docs" target="_blank" rel="noreferrer">📡 API Docs</a>
+      <a class="drawer__link" href="index.html">Home</a>
+      <a class="drawer__link" href="#features">Funcionalidades</a>
+      <a class="drawer__link" href="#assets">Tecnologias</a>
+      <a class="drawer__link" href="#how">Como funciona</a>
+      <a class="drawer__link" href="chat.html">Chat IA</a>
+      <a class="drawer__link" href="comunidade.html">Comunidade</a>
+      <a class="drawer__link" href="quem-somos.html">Quem somos</a>
+      <a class="drawer__link" href="http://127.0.0.1:8001/docs" target="_blank" rel="noreferrer">API Docs</a>
 
       <div class="drawer__foot">
         <span class="chip">Web3 • CloudOps • Neon UI</span>
@@ -268,13 +268,12 @@
     <section id="features" class="section section--alt">
       <div class="container">
 
-        <!-- Cabeçalho: kicker + título parcialmente gradiente -->
         <div class="section__head reveal">
           <div class="kicker">
             <span class="kicker__dot"></span>
             <span>O que entregamos</span>
           </div>
-          <h2 class="section__title">Features com <span class="grad">glow</span></h2>
+          <h2 class="section__title">Funcionalidades <span class="grad"></span></h2>
           <p class="section__desc">Cada funcionalidade pensada para cloud engineers que precisam de velocidade e precisão.</p>
         </div>
 
@@ -401,7 +400,7 @@
             <span class="kicker__dot"></span>
             <span>Fluxo de uso</span>
           </div>
-          <h2 class="section__title">How it <span class="grad">works</span></h2>
+          <h2 class="section__title">Como <span class="grad">funciona</span></h2>
           <p class="section__desc">3 passos simples. Zero confusão. Visual limpo e forte.</p>
         </div>
 
@@ -468,27 +467,23 @@
     <section id="platform" class="section">
       <div class="container">
 
-        <!-- Bloco centralizado sem coluna direita -->
         <div class="platform__solo reveal">
 
           <div class="kicker">
             <span class="kicker__dot"></span>
-            <span>Web3-Grade Platform</span>
+            <span>Tecnologia de ponta</span>
             <span class="kicker__sep">•</span>
-            <span>Portfolio Ready</span>
+            <span>Feito no Brasil</span>
           </div>
 
-          <!-- Título com gradiente parcial na segunda palavra -->
-          <h2 class="section__title">Wallet / <span class="grad">Platform</span></h2>
+          <h2 class="section__title">Infraestrutura / <span class="grad">Inteligência</span></h2>
           <p class="section__desc">
-            Uma experiência "Web3-grade": interface premium, tipografia forte e um fluxo claro.
-            Ideal para apresentar como portfolio de Cloud/DevOps + Front-end.
+            Uma plataforma cloud-native com IA real: backend em FastAPI, interface Web3 e integração direta com OpenAI.
+            Desenvolvida por brasileiros apaixonados por Cloud e DevOps.
           </p>
 
-          <!-- Grid 2×2: 4 bullet points com ícone SVG + texto -->
           <div class="platform__bullets-grid">
 
-            <!-- Bullet 1: Glassmorphism (ícone de escudo) -->
             <div class="platform__bullet">
               <span class="platform__bullet-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -497,25 +492,22 @@
               </span>
               <div>
                 <b>Glassmorphism</b>
-                <span>Leve, sem esconder o background</span>
+                <span>Visual premium sem esconder o background</span>
               </div>
             </div>
 
-            <!-- Bullet 2: Glow Effects (ícone de sol) -->
             <div class="platform__bullet">
               <span class="platform__bullet-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <circle cx="12" cy="12" r="3"/>
-                  <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
                 </svg>
               </span>
               <div>
-                <b>Glow Effects</b>
-                <span>Botões, cards e bordas em gradiente</span>
+                <b>IA Generativa</b>
+                <span>GPT-4o-mini com prompts especializados em AWS</span>
               </div>
             </div>
 
-            <!-- Bullet 3: Animações Suaves (ícone de heartbeat) -->
             <div class="platform__bullet">
               <span class="platform__bullet-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -523,12 +515,11 @@
                 </svg>
               </span>
               <div>
-                <b>Animações Suaves</b>
-                <span>Hover + scroll reveal fluido</span>
+                <b>Animações fluidas</b>
+                <span>Scroll reveal, hover e partículas em canvas</span>
               </div>
             </div>
 
-            <!-- Bullet 4: Mobile-First (ícone de celular) -->
             <div class="platform__bullet">
               <span class="platform__bullet-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -537,14 +528,13 @@
                 </svg>
               </span>
               <div>
-                <b>Mobile-First</b>
+                <b>Mobile-first</b>
                 <span>100% responsivo em qualquer tela</span>
               </div>
             </div>
 
-          </div><!-- /platform__bullets-grid -->
+          </div>
 
-          <!-- CTAs centralizados -->
           <div class="hero__cta">
             <a class="btn btn--primary" href="http://127.0.0.1:8001/docs" target="_blank" rel="noreferrer">
               Abrir API Docs
@@ -573,13 +563,12 @@
           <p class="footer__text">Uma UI futurista + backend FastAPI para planos Cloud/DevOps.</p>
         </div>
 
-        <!-- Coluna 2: links de navegação rápida (expandidos com Chat e Comunidade) -->
         <div class="footer__links">
-          <a href="#features">Features</a>
-          <a href="#how">How it works</a>
-          <a href="#platform">Platform</a>
+          <a href="#features">Funcionalidades</a>
+          <a href="#how">Como funciona</a>
           <a href="chat.html">Chat IA</a>
           <a href="comunidade.html">Comunidade</a>
+          <a href="quem-somos.html">Quem somos</a>
         </div>
 
         <!-- Coluna 3: créditos dos autores -->

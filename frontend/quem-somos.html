@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CloudOps Copilot — Quem Somos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/main.css" />
+  <style>
+
+    /* ── PAGE ── */
+    .qs-page { min-height: 100vh; position: relative; z-index: 1; }
+
+    /* ── HERO ── */
+    .qs-hero { padding: 100px 0 48px; }
+    .qs-hero__title {
+      font-size: clamp(38px, 5vw, 68px);
+      line-height: 1.04;
+      letter-spacing: -.6px;
+      margin: 14px 0 12px;
+    }
+    .qs-hero__desc {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ── PROJETO CARD ── */
+    .qs-project {
+      margin: 0 0 64px;
+      border-radius: 24px;
+      background: rgba(10,10,18,.38);
+      border: 1px solid rgba(255,255,255,.09);
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+      position: relative;
+    }
+    .qs-project::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--grad);
+    }
+    .qs-project__inner {
+      padding: 36px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .qs-project__label {
+      font-size: 11px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: rgba(0,245,255,.80);
+      margin-bottom: 10px;
+    }
+    .qs-project__title {
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 900; line-height: 1.1;
+      margin: 0 0 12px;
+    }
+    .qs-project__desc {
+      color: var(--muted); font-size: 14px; line-height: 1.7;
+      margin: 0 0 24px;
+    }
+    .qs-project__tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .qs-tag {
+      font-size: 11px; font-weight: 700; padding: 4px 12px;
+      border-radius: 8px; letter-spacing: .04em;
+      background: rgba(0,245,255,.10); color: #00f5ff;
+      border: 1px solid rgba(0,245,255,.18);
+    }
+    .qs-tag--pink { background: rgba(255,60,172,.10); color: #ff3cac; border-color: rgba(255,60,172,.20); }
+    .qs-tag--orange { background: rgba(255,106,0,.10); color: #ff8c42; border-color: rgba(255,106,0,.20); }
+    .qs-tag--purple { background: rgba(124,58,237,.12); color: #c4b5fd; border-color: rgba(124,58,237,.22); }
+
+    /* Visual do projeto */
+    .qs-project__visual {
+      border-radius: 18px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 28px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .qs-stack-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px; border-radius: 12px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      transition: border-color .15s, background .15s;
+    }
+    .qs-stack-row:hover { border-color: rgba(0,245,255,.20); background: rgba(0,245,255,.05); }
+    .qs-stack-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: #00f5ff;
+      background: rgba(0,245,255,.10); border: 1px solid rgba(0,245,255,.18);
+    }
+    .qs-stack-icon svg { width: 18px; height: 18px; }
+    .qs-stack-icon--pink { background: rgba(255,60,172,.10); border-color: rgba(255,60,172,.18); color: #ff3cac; }
+    .qs-stack-icon--orange { background: rgba(255,106,0,.10); border-color: rgba(255,106,0,.18); color: #ff8c42; }
+    .qs-stack-icon--purple { background: rgba(124,58,237,.12); border-color: rgba(124,58,237,.22); color: #c4b5fd; }
+    .qs-stack-info b { display: block; font-size: 13px; font-weight: 700; color: rgba(243,244,255,.90); }
+    .qs-stack-info span { font-size: 11px; color: rgba(243,244,255,.40); }
+
+    /* ── TEAM GRID ── */
+    .qs-section-title {
+      font-size: 13px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: rgba(243,244,255,.45);
+      margin: 0 0 28px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .qs-section-title::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .qs-team { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 80px; }
+
+    /* Card de membro */
+    .qs-card {
+      border-radius: 24px;
+      background: rgba(10,10,18,.40);
+      border: 1px solid rgba(255,255,255,.09);
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+      position: relative;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .qs-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 80px rgba(0,0,0,.40);
+      border-color: rgba(255,255,255,.15);
+    }
+
+    /* Linha de cor no topo — diferente por membro */
+    .qs-card__accent {
+      height: 3px; width: 100%;
+    }
+    .qs-card--a .qs-card__accent { background: linear-gradient(90deg, #00f5ff, #7c3aed); }
+    .qs-card--b .qs-card__accent { background: linear-gradient(90deg, #ff3cac, #ff6a00); }
+
+    .qs-card__body { padding: 28px 28px 24px; }
+
+    /* Avatar com inicial */
+    .qs-avatar {
+      width: 64px; height: 64px; border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; font-weight: 900; margin-bottom: 16px;
+      position: relative; flex-shrink: 0;
+    }
+    .qs-card--a .qs-avatar { background: rgba(0,245,255,.12); border: 1px solid rgba(0,245,255,.25); color: #00f5ff; }
+    .qs-card--b .qs-avatar { background: rgba(255,60,172,.12); border: 1px solid rgba(255,60,172,.25); color: #ff3cac; }
+
+    /* Brilho pulsante atrás do avatar */
+    .qs-avatar::after {
+      content: '';
+      position: absolute; inset: -6px; border-radius: 22px;
+      opacity: 0; transition: opacity .3s;
+    }
+    .qs-card--a .qs-avatar::after { box-shadow: 0 0 30px rgba(0,245,255,.25); }
+    .qs-card--b .qs-avatar::after { box-shadow: 0 0 30px rgba(255,60,172,.25); }
+    .qs-card:hover .qs-avatar::after { opacity: 1; }
+
+    .qs-card__name { font-size: 20px; font-weight: 900; margin: 0 0 3px; }
+    .qs-card__role { font-size: 13px; color: var(--muted); margin: 0 0 16px; }
+
+    .qs-card__bio {
+      font-size: 13px; line-height: 1.7;
+      color: rgba(243,244,255,.72); margin: 0 0 20px;
+    }
+
+    /* Chips de skills */
+    .qs-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+    .qs-skill {
+      font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 7px; letter-spacing: .03em;
+    }
+    .qs-card--a .qs-skill { background: rgba(0,245,255,.08); color: rgba(0,245,255,.85); border: 1px solid rgba(0,245,255,.14); }
+    .qs-card--b .qs-skill { background: rgba(255,60,172,.08); color: rgba(255,60,172,.85); border: 1px solid rgba(255,60,172,.14); }
+
+    /* Links sociais */
+    .qs-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .qs-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 16px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color: rgba(243,244,255,.75);
+      font-size: 12px; font-weight: 700;
+      text-decoration: none;
+      transition: all .15s ease;
+    }
+    .qs-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .qs-link:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.20); color: #fff; background: rgba(255,255,255,.08); }
+    .qs-link--primary {
+      background: var(--grad); color: #0b0a12;
+      border: none; font-weight: 900;
+      box-shadow: 0 8px 28px rgba(255,60,172,.18);
+    }
+    .qs-link--primary:hover { filter: saturate(1.1); box-shadow: 0 12px 36px rgba(255,60,172,.28); color: #0b0a12; }
+    .qs-link--linkedin { border-color: rgba(10,102,194,.35); }
+    .qs-link--linkedin:hover { border-color: rgba(10,102,194,.60); background: rgba(10,102,194,.12); }
+    .qs-link--github { border-color: rgba(255,255,255,.15); }
+    .qs-link--github:hover { border-color: rgba(255,255,255,.30); background: rgba(255,255,255,.08); }
+    .qs-link--blog { border-color: rgba(0,245,255,.20); color: #00f5ff; }
+    .qs-link--blog:hover { border-color: rgba(0,245,255,.40); background: rgba(0,245,255,.08); }
+
+    /* Cert chips */
+    .qs-certs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.07); }
+    .qs-cert {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 700; padding: 3px 10px;
+      border-radius: 7px; letter-spacing: .04em; text-transform: uppercase;
+      background: rgba(255,255,255,.05); color: rgba(243,244,255,.55);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .qs-cert svg { width: 10px; height: 10px; }
+
+    /* ── RESPONSIVO ── */
+    @media (max-width: 860px) {
+      .qs-project__inner { grid-template-columns: 1fr; }
+      .qs-team { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .qs-card__body { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark"></span>
+      <span class="brand__text"><b>CloudOps Copilot</b><small>IA + Cloud + Automação</small></span>
+    </a>
+    <nav class="nav">
+      <a class="nav__link" href="index.html">Home</a>
+      <a class="nav__link" href="index.html#features">Funcionalidades</a>
+      <a class="nav__link" href="index.html#assets">Tecnologias</a>
+      <a class="nav__link" href="index.html#how">Como funciona</a>
+      <a class="nav__link" href="chat.html">Chat IA</a>
+      <a class="nav__link" href="comunidade.html">Comunidade</a>
+      <a class="nav__link nav__link--active" href="quem-somos.html">Quem somos</a>
+      <a class="nav__link nav__pill" href="http://127.0.0.1:8001/docs" target="_blank">API Docs</a>
+    </nav>
+    <button class="nav__menu" id="menuBtn">&#9776;</button>
+  </header>
+
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer__panel">
+      <div class="drawer__head">
+        <span class="drawer__title">Menu</span>
+        <button class="drawer__close" id="menuClose">&#x2715;</button>
+      </div>
+      <a class="drawer__link" href="index.html">Home</a>
+      <a class="drawer__link" href="index.html#features">Funcionalidades</a>
+      <a class="drawer__link" href="chat.html">Chat IA</a>
+      <a class="drawer__link" href="comunidade.html">Comunidade</a>
+      <a class="drawer__link" href="quem-somos.html">Quem somos</a>
+      <a class="drawer__link" href="http://127.0.0.1:8001/docs" target="_blank">API Docs</a>
+      <div class="drawer__foot"><span class="chip">Web3 &#8226; CloudOps &#8226; Neon UI</span></div>
+    </div>
+    <div class="drawer__backdrop" id="drawerBackdrop"></div>
+  </aside>
+
+  <main class="qs-page">
+
+    <!-- HERO -->
+    <section class="qs-hero">
+      <div class="container">
+        <div class="kicker">
+          <span class="kicker__dot"></span>
+          <span>Conheça a equipe</span>
+          <span class="kicker__sep">&#8226;</span>
+          <span>Feito no Brasil</span>
+        </div>
+        <h1 class="qs-hero__title">
+          Quem está por trás<br/>
+          <span class="grad">do CloudOps Copilot</span>
+        </h1>
+        <p class="qs-hero__desc">
+          Dois irmãos de São Paulo, estudantes de Ciência da Computação e apaixonados por Cloud e interfaces que impressionam.
+          Este projeto nasceu da vontade de unir tecnologia real com design de alto nível.
+        </p>
+      </div>
+    </section>
+
+    <!-- SOBRE O PROJETO -->
+    <section style="padding: 0 0 20px;">
+      <div class="container">
+        <p class="qs-section-title">O projeto</p>
+        <div class="qs-project">
+          <div class="qs-project__inner">
+            <div>
+              <div class="qs-project__label">CloudOps Copilot &#8212; 2025</div>
+              <h2 class="qs-project__title">
+                IA especialista em<br/>
+                <span class="grad">Cloud &amp; DevOps</span>
+              </h2>
+              <p class="qs-project__desc">
+                Plataforma que combina uma interface Web3 premium com um backend FastAPI integrado ao GPT-4o-mini.
+                O usuário descreve um cenário cloud e recebe um plano técnico executável — com arquitetura, passos, validação e custos.
+                Chatbot multi-turno, comunidade interativa e design futurista.
+              </p>
+              <div class="qs-project__tags">
+                <span class="qs-tag">Python</span>
+                <span class="qs-tag">FastAPI</span>
+                <span class="qs-tag--pink qs-tag">OpenAI</span>
+                <span class="qs-tag--orange qs-tag">AWS</span>
+                <span class="qs-tag--purple qs-tag">Web3 UI</span>
+                <span class="qs-tag">HTML / CSS / JS</span>
+              </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <a class="qs-link qs-link--primary" href="chat.html">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                  Experimentar o chat
+                </a>
+                <a class="qs-link qs-link--github" href="https://github.com/ognistie" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  Ver no GitHub
+                </a>
+              </div>
+            </div>
+
+            <!-- Stack visual -->
+            <div class="qs-project__visual">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(243,244,255,.35);margin-bottom:4px;">Stack utilizada</div>
+
+              <div class="qs-stack-row">
+                <div class="qs-stack-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+                </div>
+                <div class="qs-stack-info"><b>FastAPI + Python</b><span>Backend REST / IA</span></div>
+              </div>
+
+              <div class="qs-stack-row">
+                <div class="qs-stack-icon qs-stack-icon--pink">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                </div>
+                <div class="qs-stack-info"><b>OpenAI GPT-4o-mini</b><span>IA generativa especializada</span></div>
+              </div>
+
+              <div class="qs-stack-row">
+                <div class="qs-stack-icon qs-stack-icon--orange">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <div class="qs-stack-info"><b>HTML / CSS / JavaScript</b><span>Frontend Web3 + Canvas</span></div>
+              </div>
+
+              <div class="qs-stack-row">
+                <div class="qs-stack-icon qs-stack-icon--purple">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div class="qs-stack-info"><b>AWS (S3, CloudFront, ECS...)</b><span>Especialidade técnica central</span></div>
+              </div>
+
+              <div class="qs-stack-row">
+                <div class="qs-stack-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                </div>
+                <div class="qs-stack-info"><b>Git + GitHub</b><span>Versionamento e deploy</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIME -->
+    <section style="padding: 0 0 80px;">
+      <div class="container">
+        <p class="qs-section-title">Os criadores</p>
+        <div class="qs-team">
+
+          <!-- ── GUILHERME ── -->
+          <div class="qs-card qs-card--a">
+            <div class="qs-card__accent"></div>
+            <div class="qs-card__body">
+              <div class="qs-avatar">G</div>
+              <h2 class="qs-card__name">Guilherme Moraes Franco</h2>
+              <p class="qs-card__role">Cloud &amp; DevOps Engineer &#8226; Help Desk N1/N2 &#8226; S&#227;o Paulo, SP</p>
+              <p class="qs-card__bio">
+                Estudante de Ci&#234;ncia da Computa&#231;&#227;o na UNIP e estagi&#225;rio de TI na IT Universe.
+                Apaixonado por Cloud Computing, DevOps e interfaces modernas. Respons&#225;vel pela arquitetura
+                do backend, integra&#231;&#227;o com OpenAI e identidade visual deste projeto.
+              </p>
+
+              <div class="qs-skills">
+                <span class="qs-skill">AWS</span>
+                <span class="qs-skill">Azure</span>
+                <span class="qs-skill">Python</span>
+                <span class="qs-skill">FastAPI</span>
+                <span class="qs-skill">Docker</span>
+                <span class="qs-skill">CI/CD</span>
+                <span class="qs-skill">Linux</span>
+                <span class="qs-skill">JavaScript</span>
+                <span class="qs-skill">HTML/CSS</span>
+              </div>
+
+              <div class="qs-links">
+                <a class="qs-link qs-link--primary" href="https://blogpessoalgui.netlify.app" target="_blank" rel="noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Blog pessoal
+                </a>
+                <a class="qs-link qs-link--linkedin" href="https://www.linkedin.com/in/guilherme-moraes-franco-b4b1a0353/" target="_blank" rel="noreferrer">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                  LinkedIn
+                </a>
+                <a class="qs-link qs-link--github" href="https://github.com/ognistie" target="_blank" rel="noreferrer">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  GitHub
+                </a>
+                <a class="qs-link" href="/curriculos/Curriculoo_Guilhermee.pdf" download>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Baixar CV
+                </a>
+              </div>
+
+              <div class="qs-certs">
+                <span class="qs-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>AWS Cloud Practitioner</span>
+                <span class="qs-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>AZ-900 Azure</span>
+                <span class="qs-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>DevOps Essentials</span>
+                <span class="qs-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Cloud FIAP</span>
+                <span class="qs-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Linux SENAI</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── GABRIEL ── -->
+          <div class="qs-card qs-card--b">
+            <div class="qs-card__accent"></div>
+            <div class="qs-card__body">
+              <div class="qs-avatar">G</div>
+              <h2 class="qs-card__name">Gabriel Moraes Franco</h2>
+              <p class="qs-card__role">Analista de Sistemas &#8226; Prefeitura de Osasco &#8226; S&#227;o Paulo, SP</p>
+              <p class="qs-card__bio">
+                Estudante de Ci&#234;ncia da Computa&#231;&#227;o na UNIP e estagi&#225;rio na Prefeitura de Osasco,
+                desenvolvendo e mantendo o portal <strong>participa.osasco.sp.gov.br</strong>.
+                Especialista em desenvolvimento web, automação e ambientes cloud Azure e Linux.
+              </p>
+
+              <div class="qs-skills">
+                <span class="qs-skill">Azure</span>
+                <span class="qs-skill">Linux</span>
+                <span class="qs-skill">Python</span>
+                <span class="qs-skill">JavaScript</span>
+                <span class="qs-skill">HTML/CSS</span>
+                <span class="qs-skill">Power BI</span>
+                <span class="qs-skill">DevOps</span>
+                <span class="qs-skill">CI/CD</span>
+              </div>
+
+              <div class="qs-links">
+                <a class="qs-link qs-link--primary" href="https://participa.osasco.sp.gov.br" target="_blank" rel="noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Ver projeto real
+                </a>
+                <a class="qs-link qs-link--linkedin" href="https://www.linkedin.com/in/gabriel-moraes-franco-935453352/" target="_blank" rel="noreferrer">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                  LinkedIn
+                </a>
+                <a class="qs-link" href="/curriculos/curriculo_gabriel.pdf" download>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Baixar CV
+                </a>
+              </div>
+
+              <div class="qs-certs">
+                <span class="qs-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>AZ-900 Azure</span>
+                <span class="qs-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Linux SENAI</span>
+                <span class="qs-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Power BI</span>
+                <span class="qs-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>DevOps CI/CD</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer__divider"></div>
+    <div class="container footer__grid">
+      <div>
+        <b class="footer__brand">CloudOps Copilot</b>
+        <p class="footer__text">Feito com dedica&#231;&#227;o por Guilherme &amp; Gabriel Moraes Franco.</p>
+      </div>
+      <div class="footer__links">
+        <a href="index.html">Home</a>
+        <a href="chat.html">Chat IA</a>
+        <a href="comunidade.html">Comunidade</a>
+        <a href="quem-somos.html">Quem somos</a>
+      </div>
+      <div class="footer__credits">
+        <span>&#169; CloudOps Copilot &#8212; Guilherme &amp; Gabriel Moraes Franco</span>
+        <small>UI &#8226; Cloud &#8226; Portfolio &#8226; Web3 aesthetic</small>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./scripts/main.js"></script>
+</body>
+</html>

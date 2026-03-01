@@ -126,7 +126,7 @@
 
   function safeList(v) { return Array.isArray(v) && v.length > 0 ? v : null; }
   function setOut(html) { out.innerHTML = html; }
-  function renderError(msg) { setOut(`<div class="plan-error">❌ ${msg}</div>`); }
+  function renderError(msg) { setOut(`<div class="plan-error">${msg}</div>`); }
 
   function renderSection(icon, title, items) {
     if (!items || !items.length) return "";
@@ -162,21 +162,21 @@
       <div class="plan-card">
         <div class="plan-header">
           <span class="plan-category">${category.toUpperCase()}</span>
-          <h3 class="plan-title">📌 ${title}</h3>
+          <h3 class="plan-title"><span class="plan-pin">▸</span> ${title}</h3>
           ${summary  ? `<p class="plan-summary">${summary}</p>` : ""}
-          ${decision ? `<p class="plan-decision">💡 <em>${decision}</em></p>` : ""}
+          ${decision ? `<p class="plan-decision"><span class="plan-decision-icon">→</span> <em>${decision}</em></p>` : ""}
         </div>
-        ${renderSection("🔮", "Premissas",       safeList(data.assumptions))}
-        ${renderSection("🏗",  "Arquitetura",     safeList(data.architecture))}
-        ${renderSection("✅", "Passos",           safeList(data.steps))}
-        ${renderKeyValue("⚙️", "Cache / CDN",     data.cdn_cache)}
-        ${renderKeyValue("🔒", "HTTPS / Domínio", data.https_domain)}
-        ${renderSection("🧪", "Validação",        safeList(data.validation))}
-        ${renderSection("💰", "Custos",           safeList(data.cost_notes))}
-        ${renderSection("⚠️", "Problemas comuns", safeList(data.common_issues))}
+        ${renderSection("◈", "Premissas",       safeList(data.assumptions))}
+        ${renderSection("⬡", "Arquitetura",     safeList(data.architecture))}
+        ${renderSection("▹", "Passos",           safeList(data.steps))}
+        ${renderKeyValue("⊙", "Cache / CDN",     data.cdn_cache)}
+        ${renderKeyValue("⊕", "HTTPS / Domínio", data.https_domain)}
+        ${renderSection("◎", "Validação",        safeList(data.validation))}
+        ${renderSection("◇", "Custos",           safeList(data.cost_notes))}
+        ${renderSection("△", "Problemas comuns", safeList(data.common_issues))}
         ${safeList(data.estimated_services) ? `
           <div class="plan-section plan-services">
-            <h4>☁️ Serviços estimados</h4>
+            <h4>◈ Serviços estimados</h4>
             <div class="plan-tags">
               ${data.estimated_services.map(s => `<span class="plan-tag">${s}</span>`).join("")}
             </div>
@@ -193,7 +193,7 @@
     btn.disabled = true;
     const oldText = btn.textContent;
     btn.textContent = "Gerando...";
-    setOut('<div class="plan-loading">⏳ Gerando plano, aguarde...</div>');
+    setOut('<div class="plan-loading">Gerando plano...</div>');
 
     try {
       const res = await fetch("http://127.0.0.1:8001/generate-plan", {
@@ -227,9 +227,3 @@
   btn.addEventListener("click", generate);
   input.addEventListener("keydown", e => { if (e.key === "Enter") generate(); });
 })();
-
-
-
-
-
-

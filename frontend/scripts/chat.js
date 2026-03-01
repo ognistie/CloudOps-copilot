@@ -125,7 +125,7 @@
     const div = document.createElement("div");
     div.className = "chat-msg chat-msg--user";
     div.innerHTML = `
-      <div class="chat-msg__avatar">👤</div>
+      <div class="chat-msg__avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
       <div class="chat-msg__bubble"><p>${escHtml(text)}</p></div>
       <div class="chat-msg__time">${nowTime()}</div>`;
     messagesEl.appendChild(div);
@@ -138,7 +138,7 @@
     div.className = "chat-msg chat-msg--bot chat-msg--typing";
     div.id = "typingIndicator";
     div.innerHTML = `
-      <div class="chat-msg__avatar">🤖</div>
+      <div class="chat-msg__avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 15h.01M16 15h.01"/></svg></div>
       <div class="chat-msg__bubble">
         <div class="typing-dots">
           <span></span><span></span><span></span>
@@ -157,7 +157,7 @@
     const div = document.createElement("div");
     div.className = "chat-msg chat-msg--bot";
     div.innerHTML = `
-      <div class="chat-msg__avatar">🤖</div>
+      <div class="chat-msg__avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 15h.01M16 15h.01"/></svg></div>
       <div class="chat-msg__bubble"><p>${parseMarkdown(text)}</p></div>
       <div class="chat-msg__time">${nowTime()}</div>`;
     messagesEl.appendChild(div);
@@ -169,9 +169,9 @@
     const div = document.createElement("div");
     div.className = "chat-msg chat-msg--bot";
     div.innerHTML = `
-      <div class="chat-msg__avatar">⚠️</div>
+      <div class="chat-msg__avatar"><svg viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
       <div class="chat-msg__bubble" style="border-color:rgba(239,68,68,.25);background:rgba(239,68,68,.08);">
-        <p style="color:#fca5a5;">❌ ${escHtml(text)}</p>
+        <p style="color:#fca5a5;">${escHtml(text)}</p>
       </div>
       <div class="chat-msg__time">${nowTime()}</div>`;
     messagesEl.appendChild(div);
