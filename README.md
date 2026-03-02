@@ -149,7 +149,7 @@ Projeto versionado com boas práticas de Git:
 
 ---
 
-## 👨‍💻 Autorws
+## 👨‍💻 Autores
 
 Guilherme Moraes Franco  
 📧 og.guifranco@gmail.com 
@@ -159,6 +159,7 @@ Guilherme Moraes Franco
 Gabriel Moraes Franco  
 📧 gabrielmoraesprincipe@gmail.com
 🔗 https://www.linkedin.com/in/gabriel-moraes-franco-935453352/
+🔗https://github.com/BielmFranco
 
 ---
 
