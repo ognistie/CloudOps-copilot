@@ -149,11 +149,16 @@ Projeto versionado com boas práticas de Git:
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Autorws
 
 Guilherme Moraes Franco  
-📧 og.guifranco@gmail.com  
-🔗 https://github.com/ognistie
+📧 og.guifranco@gmail.com 
+🔗 https://github.com/ognistie 
+🔗 https://www.linkedin.com/in/guilherme-moraes-franco-b4b1a0353/?skipRedirect=true
+
+Gabriel Moraes Franco  
+📧 gabrielmoraesprincipe@gmail.com
+🔗 https://www.linkedin.com/in/gabriel-moraes-franco-935453352/
 
 ---
 
