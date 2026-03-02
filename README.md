@@ -68,7 +68,7 @@ O arquivo real `.env` **não deve ser enviado ao GitHub**.
 
 ## 🖥 Como Rodar o Projeto Localmente
 
-### 1️⃣ Clonar o repositório
+### 1️⃣ Clonar o Repositorio
 git clone https://github.com/ognistie/CloudOps-copilot.git
 
 cd CloudOps-copilot 
