@@ -112,7 +112,8 @@ python -m http.server 5500
 
 ---
 
-## 💡 Exemplos de Uso
+## 💡 Exemplos de Uso 
+Link Para Acesso: http://3.144.142.200
 
 ### Deploy
 - Criar plano de deploy para aplicação FastAPI
