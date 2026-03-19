@@ -109,7 +109,7 @@ A comunicação entre frontend e backend é feita via `fetch` (REST), com CORS h
 
 ### Backend — `api/`
 
-| Ferramenta | Versão | Função no Projeto |
+| Ferramenta | Versão | Função dentro do Projeto |
 |---|---|---|
 | **Python** | 3.11+ | Linguagem principal do backend |
 | **FastAPI** | 0.134.0 | Framework web assíncrono para construção da API REST. Define as rotas `/generate-plan`, `/chat` e `/health` com validação automática de schemas via Pydantic |
