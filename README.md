@@ -4,7 +4,7 @@ CloudOps Copilot é um assistente web + API desenvolvido para auxiliar em tarefa
 
 Projeto desenvolvido com foco em:
 
-- Arquitetura limpa
+- Arquitetura Limpa
 - Organização profissional
 - Boas práticas de versionamento
 - Estrutura pronta para evolução e deploy
@@ -112,7 +112,8 @@ python -m http.server 5500
 
 ---
 
-## 💡 Exemplos de Uso
+## 💡 Exemplos de Uso 
+Link Para Acesso: http://3.144.142.200
 
 ### Deploy
 - Criar plano de deploy para aplicação FastAPI
