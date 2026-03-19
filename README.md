@@ -122,7 +122,7 @@ A comunicação entre frontend e backend é feita via `fetch` (REST), com CORS h
 
 ### Frontend — `frontend/`
 
-| Ferramenta | Função no Projeto |
+| Ferramenta | Função dentro do Projeto |
 |---|---|
 | **HTML5** | Estrutura semântica de 4 páginas: landing page (`index.html`), chat (`chat.html`), comunidade (`comunidade.html`) e "quem somos" (`quem-somos.html`) |
 | **CSS3** | Estilização completa com design system dark/neon, animações CSS (keyframes, transitions), layout responsivo via media queries, variáveis CSS para paleta de cores |
@@ -133,7 +133,7 @@ A comunicação entre frontend e backend é feita via `fetch` (REST), com CORS h
 
 ### Infraestrutura
 
-| Ferramenta | Função no Projeto |
+| Ferramenta | Função dentro do Projeto |
 |---|---|
 | **AWS EC2** | Instância onde o backend e o frontend estão hospedados em produção (IP: `3.144.142.200`) |
 | **Git/GitHub** | Versionamento com branches, commits semânticos e pull requests para revisão de código |
