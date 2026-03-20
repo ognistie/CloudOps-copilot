@@ -117,7 +117,7 @@ A comunicação entre frontend e backend é feita via `fetch` (REST), com CORS h
 | **Pydantic** | 2.12.5 | Validação e serialização de dados. Define os modelos `PlanRequest`, `ChatMessage` e `ChatRequest` que garantem que todas as requisições chegam com os campos corretos e tipados |
 | **OpenAI SDK** | 2.24.0 | Client oficial da OpenAI para Python. Realiza as chamadas à API do GPT-4o-mini com system prompts customizados, controle de temperatura e max_tokens |
 | **python-dotenv** | 1.2.1 | Carrega variáveis de ambiente do arquivo `.env` local, isolando a chave da API sem expô-la no código-fonte ou no repositório |
-| **Starlette** | 0.52.1 | Framework ASGI subjacente ao FastAPI. Fornece o middleware CORS que permite requisições cross-origin do frontend |
+| **Starlete** | 0.52.1 | Framework ASGI subjacente ao FastAPI. Fornece o middleware CORS que permite requisições cross-origin do frontend |
 | **HTTPX** | 0.28.1 | Cliente HTTP assíncrono utilizado internamente pelo OpenAI SDK para comunicação com a API da OpenAI |
 
 ### Frontend — `frontend/`
